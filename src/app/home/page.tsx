@@ -9,6 +9,8 @@ export default function Component() {
     const [currentScore, setCurrentScore] = useState(0);
     const [rightAnswer, setRightAnswer] = useState(5);
 
+    const [timeLeft, setTimeLeft] = useState(4);
+
     let correctNumber = 0;
 
     function generateProblem() {
@@ -53,21 +55,40 @@ export default function Component() {
     }
 
     const checkAnswer = (answer: number) => {
-        let score: number;
         if (answer == rightAnswer) {
-            score = currentScore + 1;
-            generateProblem()
+            generateProblem();
+            updateScore(true);
         } else {
-            score = Math.max(0, currentScore - 1);
+            updateScore(false);
         }
+    }
 
-        // update score
+    function updateScore(isRight: boolean) {
+        let score: number;
+        score = isRight ? currentScore + 1 : score = Math.max(0, currentScore - 1);
         setCurrentScore(score);
     }
 
     useEffect(() => {
-        generateProblem();
-    }, []);
+        if (timeLeft === 0) {
+            setTimeLeft(4);
+            updateScore(false);
+            generateProblem();
+        }
+
+        // exit early when we reach 0
+        if (!timeLeft) return;
+
+        // save intervalId to clear the interval when the
+        // component re-renders
+        const intervalId = setInterval(() => {
+            // @ts-ignore
+            setTimeLeft(timeLeft - 1);
+        }, 1000);
+
+        // clear interval on re-render to avoid memory leaks
+        return () => clearInterval(intervalId);
+    }, [generateProblem, timeLeft]);
 
     return (
         <div className="flex w-full h-screen justify-center items-center">
@@ -75,7 +96,7 @@ export default function Component() {
                 <div className="flex justify-center">
                     <div
                         className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-green-200 text-2xl font-semibold">
-                        2
+                        {timeLeft}
                     </div>
                 </div>
                 <div className="text-center text-xl font-medium">Score: {currentScore}</div>
