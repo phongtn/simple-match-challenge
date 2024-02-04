@@ -1,6 +1,6 @@
 'use client';
 import {Button} from "@/components/ui/button"
-import {useState} from "react";
+import {useState, useEffect} from "react";
 
 export default function Component() {
     const [simpleMath, setSimpleMatch] = useState('1 / 1');
@@ -8,7 +8,7 @@ export default function Component() {
     const [secondAnswer, setSecondAnswer] = useState(5);
     const [currentScore, setCurrentScore] = useState(0);
     const [rightAnswer, setRightAnswer] = useState(5);
-    
+
     let correctNumber = 0;
 
     function generateProblem() {
@@ -52,15 +52,22 @@ export default function Component() {
         return options;
     }
 
-    // @ts-ignore
-    function checkAnswer(event) {
-        const answer = parseInt(event.target.value);
+    const checkAnswer = (answer: number) => {
+        let score: number;
         if (answer == rightAnswer) {
-            console.log("User right");
+            score = currentScore + 1;
             generateProblem()
-        } else
-            console.log("User fail");
+        } else {
+            score = Math.max(0, currentScore - 1);
+        }
+
+        // update score
+        setCurrentScore(score);
     }
+
+    useEffect(() => {
+        generateProblem();
+    }, []);
 
     return (
         <div className="flex w-full h-screen justify-center items-center">
@@ -75,9 +82,9 @@ export default function Component() {
                 <div className="my-6 text-center text-3xl font-bold">{simpleMath} = ?</div>
                 <div className="flex justify-center gap-4">
                     <Button className="h-12 w-24 rounded-lg bg-orange-400 text-xl font-semibold"
-                            onClick={checkAnswer} value={firstAnswer}>{firstAnswer}</Button>
+                            onClick={() => checkAnswer(firstAnswer)} value={firstAnswer}>{firstAnswer}</Button>
                     <Button className="h-12 w-24 rounded-lg bg-orange-400 text-xl font-semibold"
-                            onClick={checkAnswer} value={secondAnswer}>{secondAnswer}</Button>
+                            onClick={() => checkAnswer(secondAnswer)} value={secondAnswer}>{secondAnswer}</Button>
                 </div>
             </div>
         </div>
