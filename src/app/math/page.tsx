@@ -1,6 +1,8 @@
 'use client';
 import {Button} from "@/components/ui/button"
 import {useState, useEffect} from "react";
+// @ts-ignore
+import {useSound} from "use-sound";
 
 export default function Component() {
     const cfgTimeLeft = 4;
@@ -13,6 +15,9 @@ export default function Component() {
     const [timeLeft, setTimeLeft] = useState(0);
 
     let correctNumber = 0;
+
+    const [playSoundOK] = useSound('sounds/correct.mp3');
+    const [playSoundFail] = useSound('sounds/wrong.mp3');
 
     function generateProblem() {
         // Randomly select between multiplication and division
@@ -59,8 +64,10 @@ export default function Component() {
         if (answer == rightAnswer) {
             generateProblem();
             updateScore(true);
+            playSoundOK();
         } else {
             updateScore(false);
+            playSoundFail();
         }
     }
 
@@ -73,6 +80,7 @@ export default function Component() {
     useEffect(() => {
         // Reset timer, update score, and generate problem when time reaches 0
         if (timeLeft === 0) {
+            playSoundFail();
             setTimeLeft(cfgTimeLeft);
             updateScore(false);
             generateProblem();
