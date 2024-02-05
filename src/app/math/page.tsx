@@ -3,13 +3,14 @@ import {Button} from "@/components/ui/button"
 import {useState, useEffect} from "react";
 
 export default function Component() {
+    const cfgTimeLeft = 4;
     const [simpleMath, setSimpleMatch] = useState('1 / 1');
     const [firstAnswer, setFirstAnswer] = useState(3);
     const [secondAnswer, setSecondAnswer] = useState(5);
     const [currentScore, setCurrentScore] = useState(0);
     const [rightAnswer, setRightAnswer] = useState(5);
 
-    const [timeLeft, setTimeLeft] = useState(4);
+    const [timeLeft, setTimeLeft] = useState(0);
 
     let correctNumber = 0;
 
@@ -70,25 +71,26 @@ export default function Component() {
     }
 
     useEffect(() => {
+        // Reset timer, update score, and generate problem when time reaches 0
         if (timeLeft === 0) {
-            setTimeLeft(4);
+            setTimeLeft(cfgTimeLeft);
             updateScore(false);
             generateProblem();
+            return; // Exit early to avoid unnecessary setInterval
         }
 
-        // exit early when we reach 0
+        // Exit early if timeLeft is falsy (e.g., 0)
         if (!timeLeft) return;
 
-        // save intervalId to clear the interval when the
-        // component re-renders
+        // Set up interval to decrement timeLeft every second
         const intervalId = setInterval(() => {
-            // @ts-ignore
-            setTimeLeft(timeLeft - 1);
+            setTimeLeft((prevTimeLeft) => prevTimeLeft - 1); // Use functional update for state
         }, 1000);
 
-        // clear interval on re-render to avoid memory leaks
+        // Clear interval on component unmount or re-render
         return () => clearInterval(intervalId);
-    }, [generateProblem, timeLeft]);
+    }, [timeLeft]);
+
 
     return (
         <div className="flex w-full h-screen justify-center items-center">
@@ -109,6 +111,6 @@ export default function Component() {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
