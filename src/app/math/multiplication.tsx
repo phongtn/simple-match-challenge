@@ -106,7 +106,7 @@ export default function Multiplication() {
         <div className="w-full mx-auto my-10 bg-white p-6">
         <div className="flex justify-center">
         <div
-            className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-green-200 text-2xl font-semibold">
+            className="mb-4 flex h-28 w-28 items-center justify-center rounded-full bg-green-200 text-3xl font-semibold">
             {timeLeft}
             </div>
             </div>
