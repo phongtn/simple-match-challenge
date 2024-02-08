@@ -3,7 +3,7 @@ This game is built with the support of ChatGPT which ChatGPT is the main worker.
 My responsibility is prompting to ChatGPT. ChatGPT responds to coding and research questions.  
 Initially, ChatGPT also had designed the layout for the game but it's terrible. So, I decided to update the layout for the game.
 
-All of the documentation below is also written by ChatGPT.  
+ChatGPT also writes all of the documentation below.  
 Huge thanks to the [OpenAI](https://openai.com/) the author of ChatGPT.
 
 ## Introduction
@@ -31,7 +31,7 @@ Below the multiplication problem, there are two buttons representing the possibl
 
 ### Dynamic Problem Generation
 
-After selecting an answer, the web application will generate a new multiplication problem automatically. This allows users to continuously practice their multiplication skills.
+After selecting an answer, the web application automatically generates a new multiplication problem. This allows users to practice their multiplication skills continuously.
 
 ### Score Update
 
@@ -39,7 +39,7 @@ When the user selects an answer, the score will be updated based on the correctn
 
 ### Automatic Problem Generation
 
-If the countdown clock reaches zero, the web application will generate a new multiplication problem automatically. This ensures that users always have a new problem to solve.
+If the countdown clock reaches zero, the web application automatically generates a new multiplication problem. This ensures that users always have a new problem to solve.
 
 ### Responsive Design
 
