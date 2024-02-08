@@ -1,7 +1,6 @@
 'use client';
 import {Button} from "@/components/ui/button"
 import {useState, useEffect} from "react";
-// @ts-ignore
 import {useSound} from "use-sound";
 
 
