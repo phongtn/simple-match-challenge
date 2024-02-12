@@ -14,7 +14,7 @@ export default function Multiplication() {
 
     const [timeLeft, setTimeLeft] = useState(0);
 
-    let correctNumber = 0;
+
 
     const [playSoundOK] = useSound('sounds/correct.mp3');
     const [playSoundFail] = useSound('sounds/wrong.mp3');
@@ -22,7 +22,8 @@ export default function Multiplication() {
     function generateProblem() {
         // Randomly select between multiplication and division
         const operation = Math.random() < 0.5 ? 'multiplication' : 'division';
-        let num1, num2, options;
+        let num1, num2, correctNumber: number;
+        let options: number[];
 
         if (operation === 'multiplication') {
             num1 = Math.floor(Math.random() * 10) + 1;
