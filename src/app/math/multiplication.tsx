@@ -7,13 +7,13 @@ import {useSound} from "use-sound";
 export default function Multiplication() {
     const cfgTimeLeft = 4;
     const [simpleMath, setSimpleMatch] = useState('1 / 1');
-    const [firstAnswer, setFirstAnswer] = useState(3);
-    const [secondAnswer, setSecondAnswer] = useState(5);
+    const [firstAnswer, setFirstAnswer] = useState(0);
+    const [secondAnswer, setSecondAnswer] = useState(0);
+    const [thirdAnswer, setThirdAnswer] = useState(0);
     const [currentScore, setCurrentScore] = useState(0);
-    const [rightAnswer, setRightAnswer] = useState(5);
+    const [rightAnswer, setRightAnswer] = useState(0);
 
     const [timeLeft, setTimeLeft] = useState(0);
-
 
 
     const [playSoundOK] = useSound('sounds/correct.mp3');
@@ -45,19 +45,23 @@ export default function Multiplication() {
         }
         setFirstAnswer(options[0]);
         setSecondAnswer(options[1])
+        setThirdAnswer(options[2])
         setTimeLeft(cfgTimeLeft);
     }
 
     function generateOptions(correctNumber: number, isDivision: boolean) {
         const option1 = correctNumber;
         let option2 = option1;
+        let option3: number = 0;
         while (option2 === option1) {
             if (isDivision) {
                 option2 = Math.floor(Math.random() * 10) + 1;
+                option3 = Math.floor(Math.random() * 10) + 1;
             } else
                 option2 = Math.floor(Math.random() * 100) + 1;
+                option3 = Math.floor(Math.random() * 100) + 1;
         }
-        const options = [option1, option2];
+        const options = [option1, option2, option3];
         options.sort(() => Math.random() - 0.5);
         return options;
     }
@@ -104,23 +108,25 @@ export default function Multiplication() {
 
     return (
         <div className="flex w-full h-screen justify-center items-center">
-        <div className="w-full mx-auto my-10 bg-white p-6">
-        <div className="flex justify-center">
-        <div
-            className="mb-4 flex h-28 w-28 items-center justify-center rounded-full bg-green-200 text-3xl font-semibold">
-            {timeLeft}
+            <div className="w-full mx-auto my-10 bg-white p-6">
+                <div className="flex justify-center">
+                    <div
+                        className="mb-4 flex h-28 w-28 items-center justify-center rounded-full bg-green-200 text-3xl font-semibold">
+                        {timeLeft}
+                    </div>
+                </div>
+                <div className="text-center text-xl font-medium">Score: {currentScore}</div>
+                <div className="my-6 text-center text-3xl font-bold">{simpleMath} = ?</div>
+                <div className="flex justify-center gap-4">
+                    <Button className="h-12 w-24 rounded-lg bg-orange-400 text-xl font-semibold"
+                            onClick={() => checkAnswer(firstAnswer)} value={firstAnswer}>{firstAnswer}</Button>
+                    <Button className="h-12 w-24 rounded-lg bg-orange-400 text-xl font-semibold"
+                            onClick={() => checkAnswer(secondAnswer)} value={secondAnswer}>{secondAnswer}</Button>
+                    <Button className="h-12 w-24 rounded-lg bg-orange-400 text-xl font-semibold"
+                            onClick={() => checkAnswer(thirdAnswer)} value={thirdAnswer}>{thirdAnswer}</Button>
+                </div>
             </div>
-            </div>
-            <div className="text-center text-xl font-medium">Score: {currentScore}</div>
-    <div className="my-6 text-center text-3xl font-bold">{simpleMath} = ?</div>
-        <div className="flex justify-center gap-4">
-    <Button className="h-12 w-24 rounded-lg bg-orange-400 text-xl font-semibold"
-    onClick={() => checkAnswer(firstAnswer)} value={firstAnswer}>{firstAnswer}</Button>
-        <Button className="h-12 w-24 rounded-lg bg-orange-400 text-xl font-semibold"
-    onClick={() => checkAnswer(secondAnswer)} value={secondAnswer}>{secondAnswer}</Button>
         </div>
-        </div>
-        </div>
-);
+    );
 }
 
