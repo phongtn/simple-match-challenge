@@ -3,6 +3,7 @@ import {Inter} from "next/font/google";
 import {Inter as FontSans} from "next/font/google";
 import React from "react";
 import {GoogleAnalytics} from "@next/third-parties/google";
+import {Analytics} from "@vercel/analytics/next";
 
 import {cn} from "@/lib/utils";
 import "../../styles/globals.css";
@@ -23,6 +24,7 @@ export default function RootLayout({children,}: Readonly<{ children: React.React
         <html lang="en" suppressHydrationWarning>
         <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
         {children}
+        <Analytics />
         </body>
         <GoogleAnalytics gaId="G-YX4R5K8CT3" />
         </html>
