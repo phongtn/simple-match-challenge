@@ -79,7 +79,7 @@ export default function Multiplication() {
 
     function updateScore(isRight: boolean) {
         let score: number;
-        score = isRight ? currentScore + 1 : score = Math.max(0, currentScore - 2);
+        score = isRight ? currentScore + 1 : Math.max(0, currentScore - 2);
         setCurrentScore(score);
     }
 
