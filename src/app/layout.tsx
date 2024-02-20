@@ -6,6 +6,7 @@ import {Analytics} from "@vercel/analytics/next";
 
 import {cn} from "@/lib/utils";
 import "../../styles/globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
     title: {
