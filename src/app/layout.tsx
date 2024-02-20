@@ -1,15 +1,11 @@
 import type {Metadata} from "next";
-import {Inter} from "next/font/google";
-import {Inter as FontSans} from "next/font/google";
+import { poppins } from "@/types/fonts"
 import React from "react";
 import {GoogleAnalytics} from "@next/third-parties/google";
 import {Analytics} from "@vercel/analytics/next";
 
 import {cn} from "@/lib/utils";
 import "../../styles/globals.css";
-
-const inter = Inter({subsets: ["latin"]});
-const fontSans = FontSans({subsets: ["latin"], variable: "--font-sans",})
 
 export const metadata: Metadata = {
     title: {
@@ -22,7 +18,7 @@ export const metadata: Metadata = {
 export default function RootLayout({children,}: Readonly<{ children: React.ReactNode; }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-        <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
+        <body className={cn("min-h-screen bg-background font-sans antialiased", poppins.className)}>
         {children}
         <Analytics />
         </body>
