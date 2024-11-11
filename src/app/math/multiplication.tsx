@@ -21,7 +21,7 @@ export default function Multiplication() {
 
     function generateProblem() {
         // Randomly select between multiplication and division
-        const operation = Math.random() < 0.5 ? 'multiplication' : 'division';
+        const operation = Math.random() < 0.4 ? 'multiplication' : 'division';
         let num1, num2, correctNumber: number;
         let options: number[];
 
