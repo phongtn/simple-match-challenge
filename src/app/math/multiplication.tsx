@@ -69,17 +69,17 @@ export default function Multiplication() {
     const checkAnswer = (answer: number) => {
         if (answer == rightAnswer) {
             generateProblem();
-            updateScore(true);
+            updateScore(1);
             playSoundOK();
         } else {
-            updateScore(false);
+            updateScore(-2);
             playSoundFail();
         }
     }
 
-    function updateScore(isRight: boolean) {
+    function updateScore(score: number) {
         let score: number;
-        score = isRight ? currentScore + 1 : Math.max(0, currentScore - 2);
+        score = Math.max(0, currentScore + number);
         setCurrentScore(score);
     }
 
@@ -88,7 +88,7 @@ export default function Multiplication() {
         if (timeLeft === 0) {
             playSoundFail();
             setTimeLeft(cfgTimeLeft);
-            updateScore(false);
+            updateScore(-3);
             generateProblem();
             return; // Exit early to avoid unnecessary setInterval
         }
