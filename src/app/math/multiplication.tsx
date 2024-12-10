@@ -77,9 +77,9 @@ export default function Multiplication() {
         }
     }
 
-    function updateScore(score: number) {
+    function updateScore(bonusScore: number) {
         let score: number;
-        score = Math.max(0, currentScore + number);
+        score = Math.max(0, currentScore + bonusScore);
         setCurrentScore(score);
     }
 
